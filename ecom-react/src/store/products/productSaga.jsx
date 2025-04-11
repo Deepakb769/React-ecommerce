@@ -12,6 +12,7 @@ function* fetchProducts(){
     }
 }
 
-function* watchFetchProducts(){
+export function* watchFetchProducts(){
     yield takeLatest(fetchProductRequest.type, fetchProducts);
 }
+
