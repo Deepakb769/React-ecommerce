@@ -19,7 +19,7 @@ const Product = () => {
     <div>
       {loading && <h3>Loading...</h3>}
       {error && <h3>{error}</h3>}
-      <Grid container spacing={2} sx={{ width: '100%', maxWidth: '1100px', margin: '0 auto', marginTop: '40px' }}>
+      <Grid container spacing={2} sx={{ width: '100%', maxWidth: '1100px', margin: '0 auto', marginTop: '40px', marginBottom: '40px' }}>
         {products && products.map((item) => (
           <Grid item key={item.id}>
             <ProductCard product={item} />
