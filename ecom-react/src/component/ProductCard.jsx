@@ -7,8 +7,16 @@ import {
     CardActions,
     Button
 } from '@mui/material'
+import { useNavigate } from 'react-router'
 
 const ProductCard = ({product}) => {
+
+  // const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleCart = () => {
+    navigate('/addToCart', { state: { product } })
+  }
   return (
     <>
       <Card sx={{ maxWidth: 345 }}>
@@ -27,12 +35,12 @@ const ProductCard = ({product}) => {
                 {product.description}
             </Typography>
             <Typography sx={{ marginTop: '10px' }}>
-                {product.price}
+                ${product.price}
             </Typography>
         </CardContent>
         <CardActions>
             <Button size='small'>View</Button>
-            <Button size='small'>Add to Cart</Button>
+            <Button size='small' onClick={handleCart}>Add to Cart</Button>
         </CardActions>
       </Card>
     </>

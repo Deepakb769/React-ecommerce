@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const userSlicer = createSlice({
     name : 'users',
@@ -10,10 +10,11 @@ const userSlicer = createSlice({
         isAuthenticated: false
     },
     reducers : {
+        
         loginRequest : (state) => {
             state.loading = true;
             state.error = null;
-        },
+        },  
         loginSuccess : (state, action) => {
             state.loading = false;
             state.token = action.payload.token;

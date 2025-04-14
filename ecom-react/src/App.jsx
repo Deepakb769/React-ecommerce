@@ -5,15 +5,18 @@ import ProductsLayout from './component/layouts/ProductsLayout'
 
 import Product from './container/product/Product'
 import Login from './container/login/Login'
+import AddToCart from './container/addToCart/addToCart'
+import { Add } from '@mui/icons-material'
 function App() {
   return (
     <>
       <Routes>
         <Route element={<AuthLayout />}>
-          <Route path='/login' element={<Login />} />
+          <Route path='/' element={<Login />} />
         </Route>
         <Route element={<ProductsLayout />}>
-          <Route path='/' element={<Product />} />
+          <Route path='/product' element={<Product />} />
+          <Route path='/addToCart' element={<AddToCart />} />
         </Route>
       </Routes>
 
