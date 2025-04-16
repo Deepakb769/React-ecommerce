@@ -39,8 +39,8 @@ const ProductCard = ({product}) => {
             </Typography>
         </CardContent>
         <CardActions>
-            <Button size='small'>View</Button>
-            <Button size='small' onClick={handleCart}>Add to Cart</Button>
+            <Button size='small' onClick={handleCart}>View</Button>
+            <Button size='small'>Add to Cart</Button>
         </CardActions>
       </Card>
     </>

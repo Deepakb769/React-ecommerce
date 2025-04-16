@@ -1,22 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import productReducer from './products/productSlicer';
-import {watchFetchProducts} from './products/productSaga';
-import { watchLoginRequest } from './users/userSaga';
-import userReducer from './users/userSlicer';
+import productSlice from './products/productSlicer';
+import userSlice from './users/userSlicer';
+import rootSaga from './rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
     reducer:{
-        product : productReducer,
-        users : userReducer,
+        product : productSlice,
+        users : userSlice,
     },
     middleware : ( getDefaultMiddleware ) =>
         getDefaultMiddleware().concat(sagaMiddleware),
 });
 
-sagaMiddleware.run(watchFetchProducts);
-sagaMiddleware.run(watchLoginRequest);
+sagaMiddleware.run(rootSaga)
 
 export default store;

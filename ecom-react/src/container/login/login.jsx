@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from '../../store/users/userSlicer';
 import { FormControl, Box, Typography, TextField, Button, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -61,6 +62,7 @@ const Login = () => {
           <Button type="submit" sx={{width: "100%", backgroundColor: 'black', color: 'white', borderRadius: 3}} disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
           </Button>
+          <Typography>New here, <Link to={'/signup'}>Register yourself</Link></Typography>
           {error && <Alert severity='error'>{error}</Alert>}
         </form>
       </Box>

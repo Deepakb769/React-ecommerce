@@ -1,6 +1,7 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
 import axios from 'axios';
-import { loginRequest, loginSuccess, loginFailure, fetchUserSuccess } from './userSlicer';
+import { loginRequest, loginSuccess, loginFailure, fetchUserSuccess, registerRequest, registerSuccess, registerFailure } from './userSlicer';
+
 
 function* handleLogin(action){
     try{
@@ -10,10 +11,10 @@ function* handleLogin(action){
         console.log(response)
         const token = response.data.token;
 
-        yield put(loginSuccess({token}));
-        console.log(token);
+        // yield put(loginSuccess({token, username : userRes.data}));
+        // console.log(token);
 
-        const usersRespond = yield call(axios.get, "https://fakestoreapi.com/users")
+        const usersRespond = yield call(axios.get, `https://fakestoreapi.com/users`)
         const userDetail = usersRespond.data;
 
         const loggedInUser = userDetail.find(user => user.username === username);
@@ -22,6 +23,8 @@ function* handleLogin(action){
             throw new Error("User not found");
         }
 
+        const userId = loggedInUser.id;
+
         const userRes = yield call(axios.get, `https://fakestoreapi.com/users/${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -29,12 +32,16 @@ function* handleLogin(action){
         })
         console.log(userRes.data)
 
-        yield put(fetchUserSuccess(userRes.data))
+        yield put(loginSuccess({token, userInfo: userRes.data}));
         
     }
     catch(error){
         yield put(loginFailure(error.message));
     }
+}
+
+export function* watchRegisterRequest(){
+    yield takeLatest(registerRequest.type, handleRegister);
 }
 
 export function* watchLoginRequest(){

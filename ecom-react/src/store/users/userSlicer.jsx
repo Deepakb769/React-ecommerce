@@ -10,7 +10,19 @@ const userSlicer = createSlice({
         isAuthenticated: false
     },
     reducers : {
-        
+        registerRequest : (state) => {
+            state.loading = true;
+            state.error = null;
+        },
+        registerSuccess : (state, action) => {
+            state.loading = false;
+            state.userInfo = action.payload;
+            state.isAuthenticated = true;
+        },
+        registerFailure : (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
         loginRequest : (state) => {
             state.loading = true;
             state.error = null;
@@ -18,6 +30,7 @@ const userSlicer = createSlice({
         loginSuccess : (state, action) => {
             state.loading = false;
             state.token = action.payload.token;
+            state.userInfo = action.payload.userInfo;
             state.isAuthenticated = true;
         },
         loginFailure : (state, action) => {
@@ -35,6 +48,6 @@ const userSlicer = createSlice({
     },
 })
 
-export const {loginRequest, loginSuccess, loginFailure, fetchUserSuccess, logout} = userSlicer.actions;
+export const {registerRequest, registerSuccess, registerFailure, loginRequest, loginSuccess, loginFailure, fetchUserSuccess, logout} = userSlicer.actions;
 
 export default userSlicer.reducer;

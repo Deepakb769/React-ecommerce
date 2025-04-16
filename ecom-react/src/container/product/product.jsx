@@ -9,7 +9,7 @@ const Product = () => {
 
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector((state) => state.product);
-  console.log(products, loading, error)
+  console.log(products)
 
   useEffect(() => {
     dispatch(fetchProductRequest())
