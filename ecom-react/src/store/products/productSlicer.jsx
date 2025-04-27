@@ -1,10 +1,12 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import Product from "../../container/product/Product";
+import Product from '../../container/product/Product'
 
 const initialState = {
     products: [],
     loading: false,
     error: null,
+    searchTerm: "",
+    count: 0,
 }
 
 export const productSlice = createSlice({
@@ -22,10 +24,16 @@ export const productSlice = createSlice({
         fetchProductFailure: (state, action) => {
             state.loading = false;
             state.error = action.payload;
+        },
+        setSearchTerm : (state, action) => {
+            state.searchTerm = action.payload
+        },
+        setCounter : (state) => {
+            state.count += 1
         }
     }
 });
 
-export const {fetchProductRequest, fetchProductSuccess, fetchProductFailure} = productSlice.actions;
+export const {fetchProductRequest, fetchProductSuccess, fetchProductFailure, setSearchTerm, setCounter} = productSlice.actions;
 
 export default productSlice.reducer;

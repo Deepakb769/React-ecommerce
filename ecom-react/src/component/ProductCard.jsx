@@ -7,16 +7,30 @@ import {
     CardActions,
     Button
 } from '@mui/material'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
+import { setCounter } from '../store/products/productSlicer'
 
 const ProductCard = ({product}) => {
 
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
+  const {searchTerm} = useSelector((state) => state.product)
   const navigate = useNavigate()
 
-  const handleCart = () => {
+  const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase());
+
+  if(!matchesSearch){
+    return null;
+  }
+
+  const handleProduct = () => {
     navigate('/addToCart', { state: { product } })
   }
+
+  const handleCart = () => {
+    dispatch(setCounter())
+  }
+
   return (
     <>
       <Card sx={{ maxWidth: 345 }}>
@@ -39,8 +53,8 @@ const ProductCard = ({product}) => {
             </Typography>
         </CardContent>
         <CardActions>
-            <Button size='small' onClick={handleCart}>View</Button>
-            <Button size='small'>Add to Cart</Button>
+            <Button size='small' onClick={handleProduct}>View</Button>
+            <Button size='small' onClick={handleCart}>Add to Cart</Button>
         </CardActions>
       </Card>
     </>
